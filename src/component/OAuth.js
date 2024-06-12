@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+// import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
 import EventDisplay from './EventDisplay';
@@ -26,7 +28,7 @@ export const OAuth = () => {
     eventDescription: "",
     anchorEl: null,
   });
-  const { start, end, eventName, eventDescription, anchorEl } = state;
+  const { start, end, eventName, eventDescription, anchorEl, alert } = state;
 
   if(isLoading){
     <Box sx={{ display: 'flex' }}>
@@ -42,9 +44,7 @@ export const OAuth = () => {
       }
     });
     if(error){
-      // snagbar use here to display message
-      alert("error logging in to google provider");
-      console.log(error);
+      console.log('Error logging in to google provider', error);
     }
   }
 
@@ -103,6 +103,7 @@ export const OAuth = () => {
         eventDescription: "",
         start: null,
         end: null,
+        anchorEl: null, // Closing the popover
       });
   
     } catch (error) {

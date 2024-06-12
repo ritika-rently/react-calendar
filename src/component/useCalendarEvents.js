@@ -8,8 +8,7 @@ export const useCalendarEvents = () => {
     const SCOPES = "https://www.googleapis.com/auth/calendar.events"
 
     const [events, setEvents] = useState([]);
-    const [noEvents, setNoEvents] = useState(false);
-    // no need of state to display the message no event 
+   
     /* global gapi */
     let gapi = window.gapi;
     let google = window.google;
@@ -33,10 +32,8 @@ export const useCalendarEvents = () => {
                   const events = response.result.items;
                   // no events found code 
                   if (!events || events.length === 0) {
-                    setNoEvents(true);
                     setEvents([]);
                   } else {
-                     setNoEvents(false);
                      setEvents(events);
                   }   
               }).catch((error) => {
@@ -61,5 +58,5 @@ export const useCalendarEvents = () => {
           }
         });
     };
-    return { events, noEvents, fetchEvents, deleteEvent };
+    return { events, fetchEvents, deleteEvent };
 }
