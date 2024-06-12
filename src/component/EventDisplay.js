@@ -18,7 +18,7 @@ function EventDisplay() {
       </Button>
       <div id="content">
         {events.length === 0 ? (
-          <p>No events found.</p>
+            <p className="no-event">No events found.</p>
         ) : (
           <table>
             <thead>

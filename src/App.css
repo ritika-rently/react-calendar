@@ -181,12 +181,7 @@ tbody{
 tbody tr:last-child td{
   border-bottom:0;
 }
-/* table tbody tr:nth-child(4) {
-  display : none;
-} */
-/* table tr:nth-child(4) {
-  display : none;
-} */
-/* table tr:nth-child(8) {
-  display : none;
-} */
+.no-event{
+  color: #fff;
+  margin-top: 50px;
+}
