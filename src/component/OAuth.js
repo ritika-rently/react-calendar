@@ -8,6 +8,8 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
 import EventDisplay from './EventDisplay';
@@ -17,24 +19,19 @@ export const OAuth = () => {
   const session = useSession(); //tokens have user when session exist
   const supabase = useSupabaseClient(); //connect to supabase
   const { isLoading } = useSessionContext();
-  const [start, setStart] = useState(null);
-  const [ end, setEnd ] = useState(null);
-  const [ eventName, setEventName ] = useState("");
-  const [ eventDescription, setEventDescription ] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
-  // const initialState = {
-  //   eventName: eventName,
-  //   eventDescription: eventDescription,
-  //   responseView: '',
-  //   scheduled_unit_id: [],
-  //   accessDetails: {},
-  // };
-//   state.eventDescription
-// setState(...state, {eventName: e.target.value})
-  // const [state, setState] = useState(initialState);
+  const [state, setState] = useState({
+    start: null,
+    end: null,
+    eventName: "",
+    eventDescription: "",
+    anchorEl: null,
+  });
+  const { start, end, eventName, eventDescription, anchorEl } = state;
 
   if(isLoading){
-    return <></>
+    <Box sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box>
   }
 
   const googleSignIn = async () => {
@@ -58,15 +55,14 @@ export const OAuth = () => {
   // popup start
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+    setState({ ...state, anchorEl: event.currentTarget });
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setState({ ...state, anchorEl: null });
   };
 
   const open = Boolean(anchorEl);
-  // const id = open ? 'simple-popover' : undefined;
 
   // popup close
 
@@ -101,10 +97,13 @@ export const OAuth = () => {
       console.log('Your event is created successfully:', responseData);
   
       // Reset form fields after successful event creation
-      setEventName("");
-      setEventDescription("");
-      setStart(null);
-      setEnd(null);
+      setState({
+        ...state,
+        eventName: "",
+        eventDescription: "",
+        start: null,
+        end: null,
+      });
   
     } catch (error) {
       console.error('Error creating event:', error.message);
@@ -130,27 +129,27 @@ export const OAuth = () => {
                   <Typography variant="h5" gutterBottom><span class="event-heading">Add an Event</span></Typography>
 
                   <div className="title">
-                    <input type="text" id="eventTitle" onChange={(e) => {setEventName(e.target.value)}} autoComplete='off' />
+                    <input type="text" id="eventTitle" value={eventName} onChange={(e) => { setState({ ...state, eventName: e.target.value }) }} autoComplete='off' />
                     <lable>Add Title</lable>
                   </div>
                   <div className="date-time">
                     <div className="start-date-time">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={['DateTimePicker']}>
-                          <DateTimePicker label="START DATE & TIME"  value={start}  onChange={(newValue) => setStart(newValue)} />
+                          <DateTimePicker label="START DATE & TIME"  value={start}  onChange={(newValue) => setState({ ...state, start: newValue })} />
                         </DemoContainer>
                       </LocalizationProvider>
                     </div>
                     <div className="end-date-time">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={['DateTimePicker']}>
-                          <DateTimePicker label="END DATE & TIME" value={end}  onChange={(newValue) => setEnd(newValue)} />
+                          <DateTimePicker label="END DATE & TIME" value={end}  onChange={(newValue) => setState({ ...state, end: newValue })} />
                         </DemoContainer> 
                     </LocalizationProvider>
                     </div>
                   </div>
                   <div className='description'>
-                    <input type="text" onChange={(e) => {setEventDescription(e.target.value)}} autoComplete='off' />
+                    <input type="text" value={eventDescription} onChange={(e) => { setState({ ...state, eventDescription: e.target.value }) }} autoComplete='off' />
                     <lable>Add Description</lable>
                   </div>
                   <div className='buttons'>
