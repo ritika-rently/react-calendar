@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-// import Alert from '@mui/material/Alert';
-// import Stack from '@mui/material/Stack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
 import EventDisplay from './EventDisplay';
@@ -28,7 +26,7 @@ export const OAuth = () => {
     eventDescription: "",
     anchorEl: null,
   });
-  const { start, end, eventName, eventDescription, anchorEl, alert } = state;
+  const { start, end, eventName, eventDescription, anchorEl } = state;
 
   if(isLoading){
     <Box sx={{ display: 'flex' }}>
@@ -49,7 +47,10 @@ export const OAuth = () => {
   }
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log('Error signing out', error);
+    }
   }
 
   // popup start
