@@ -1,0 +1,192 @@
+html, body{
+  height:100%;
+  background-image: url("mountain.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-size: cover;
+  overflow: hidden;
+}
+header{
+  display: flex;
+  padding: 10px 50px;
+  background-color: #00000057;
+  color: #fff;
+}
+header .user-icon{
+  margin-left: auto;
+  vertical-align: middle;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 25px ;
+}
+header h2{
+  font-size: 20px;
+  font-family: Montserrat, Sans-Serif;
+  font-style: italic;
+}
+.inner-container{
+  width: 800px;
+  margin: 90px auto;
+  text-align: center;
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+.container{
+  display: flex;
+  gap: 20px;
+  min-height: 100%;
+}
+.sign-out-button{
+  text-align: center;
+  margin: 50px 150px;
+}
+.container h3{
+  font-style: italic;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+.container h2{
+  font-family: Roboto, Arial, sans-serif;
+  color: #000;
+  font-size: 35px;
+  line-height: 110%;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+.title, .description{
+  position: relative;
+}
+.title input, .description input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(196 196 196);
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+    color: #212121;
+}
+.title lable, .description lable{
+  position: absolute;
+  bottom: 30px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  padding: 5px 28px;
+  position: absolute;
+  left: -24px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.title input:focus, .description input:focus{
+  border-bottom: 0px solid #1876d2;
+  box-shadow: 0 1px 0 0 #1876d2;
+  color: #3e4250;
+}
+.title input:focus ~ lable, .description input:focus ~ lable{
+  bottom: 45px;
+  font-size: 13px;
+  color: #1876d2;
+}
+.title input:focus ~ lable, .title input:valid ~ lable , .description input:focus ~ lable, .description input:valid ~ lable{
+  transform: translateY(-20px);
+  font-size: 15px;
+}
+.date-time{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+.add-event-button, .sign-out-button, .sign-in-button{
+  color: #fff;
+  background-color: #1876d2; 
+  border: 1px solid #1876d2;
+  padding: 10px 20px;
+  border-radius: 2px;
+  font-size: 15px;
+  width: 50%;
+  margin: 10px 20px;
+}
+.title{
+  margin-top: 60px;
+}
+
+.plus-icon{
+  padding-right: 10px;
+}
+.css-h93ljk-MuiTypography-root{
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+  background-color: #f1f3f4;
+  margin-left: -20px !important;
+}
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+  padding: 0px 20px 20px 20px;
+}
+.css-sghohy-MuiButtonBase-root-MuiButton-root, .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+  margin-left: 15px !important;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 50px;
+}
+table, tr, td, th{
+  /* padding: 10px; */
+  /* margin: auto; */
+  border: none;
+  text-align: left;
+}
+th{
+  padding: 10px;
+  background-color: #f8fafc;
+  border-bottom: 2px solid #c6d5e3;
+}
+td{
+  border-bottom: 1px solid #eaeaea;
+  padding: 16px 12px 14px;
+}
+.delete-button, .edit-button{
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+}
+.delete-button{
+  color: red;
+}
+.edit-button{
+  color: #1876d2;
+}
+table tbody tr:nth-child(1) {
+  display : none;
+}
+tbody{
+  color:#fff;
+}
+tbody tr:last-child td{
+  border-bottom:0;
+}
+/* table tbody tr:nth-child(4) {
+  display : none;
+} */
+/* table tr:nth-child(4) {
+  display : none;
+} */
+/* table tr:nth-child(8) {
+  display : none;
+} */
