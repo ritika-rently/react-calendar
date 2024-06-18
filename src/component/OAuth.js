@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
 import { makeStyles } from '@mui/styles';
+import TextField from '@mui/material/TextField';
 import EventDisplay from './EventDisplay';
 
 
@@ -217,8 +218,11 @@ export const OAuth = () => {
                   <Typography variant="h5" gutterBottom><span class="event-heading">Add an Event</span></Typography>
 
                   <div className="title" style={styles.title}>
-                    <input type="text" id="eventTitle" style={styles.title.input} value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} autoComplete='off' />
-                    <lable style={styles.title.lable}>Add Title</lable>
+                  <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '55ch' },}} noValidate autoComplete="off">
+                    <TextField id="standard-basic" label="Add Title" variant="standard" value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} />
+                  </Box>
+                    {/* <input type="text" id="eventTitle" style={styles.title.input} value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} autoComplete='off' /> */}
+                    {/* <lable style={styles.title.lable}>Add Title</lable> */}
                   </div>
                   <div className="date-time">
                     <div className="start-date-time">
@@ -237,8 +241,11 @@ export const OAuth = () => {
                     </div>
                   </div>
                   <div className='description' style={styles.description}>
-                    <input type="text" style={styles.description.input} value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} autoComplete='off' />
-                    <lable style={styles.lable}>Add Description</lable>
+                    <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '55ch' },}} noValidate autoComplete="off">
+                      <TextField id="standard-basic" label="Add Description" variant="standard" value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} />
+                    </Box>
+                    {/* <input type="text" style={styles.description.input} value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} autoComplete='off' />
+                    <lable style={styles.lable}>Add Description</lable> */}
                   </div>
                   <div className='buttons'>
                     <Button variant="contained" size="medium" onClick={() => createCalendarEvent()}> Create Calendar Event </Button>
