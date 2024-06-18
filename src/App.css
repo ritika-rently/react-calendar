@@ -7,13 +7,13 @@ html, body{
   background-size: cover;
   overflow: hidden;
 }
-header{
+/* header{
   display: flex;
   padding: 10px 50px;
   background-color: #00000057;
   color: #fff;
-}
-header .user-icon{
+} */
+/* header .user-icon{
   margin-left: auto;
   vertical-align: middle;
   align-items: center;
@@ -24,24 +24,24 @@ header h2{
   font-size: 20px;
   font-family: Montserrat, Sans-Serif;
   font-style: italic;
-}
-.inner-container{
+} */
+/* .inner-container{
   width: 800px;
   margin: 90px auto;
   text-align: center;
   padding: 20px 10px;
   border-radius: 10px;
-}
-.container{
+} */
+/* .container{
   display: flex;
   gap: 20px;
   min-height: 100%;
-}
-.sign-out-button{
+} */
+/* .sign-out-button{
   text-align: center;
   margin: 50px 150px;
-}
-.container h3{
+} */
+/* .container h3{
   font-style: italic;
   font-family: Roboto, Arial, sans-serif;
   font-size: 15px;
@@ -54,11 +54,11 @@ header h2{
   line-height: 110%;
   font-weight: 500;
   margin-bottom: 40px;
-}
-.title, .description{
+} */
+/* .title, .description{
   position: relative;
-}
-.title input, .description input{
+} */
+/* .title input, .description input{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid rgb(196 196 196);
@@ -72,7 +72,7 @@ header h2{
     box-sizing: content-box;
     transition: all 0.3s;
     color: #212121;
-}
+} */
 .title lable, .description lable{
   position: absolute;
   bottom: 30px;

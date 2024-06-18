@@ -12,21 +12,107 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
+import { makeStyles } from '@mui/styles';
 import EventDisplay from './EventDisplay';
 
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    display: 'flex',
+    padding: '10px 50px',
+    backgroundColor: '#00000057',
+    color: '#fff',
+  },
+  headerH2: {
+    fontSize: '20px',
+    fontFamily: 'Montserrat, Sans-Serif',
+    fontStyle: 'italic',
+  },
+  userIcon: {
+    marginLeft: 'auto',
+    verticalAlign: 'middle',
+    alignItems: 'center',
+    marginTop: '15px',
+    fontSize: '25px',
+  },
+  innerContainer: {
+    width: '800px',
+    margin: '90px auto',
+    textAlign: 'center',
+    padding: '20px 10px',
+    borderRadius: '10px',
+  },
+  container: {
+    display: 'flex',
+    gap: '20px',
+    minHeight: '100%',
+  },
+  signOutButton: {
+    textAlign: 'center',
+    margin: '50px 150px',
+  },
+  title: {
+    position: 'relative',
+  },
+  description: {
+    position: 'relative',
+  },
+}));
+
+const styles = {
+  title: {
+    position: "relative",
+    input: {
+      backgroundColor: "transparent",
+      border: "none",
+      borderBottom: "1px solid rgb(196 196 196)",
+      borderRadius: "0",
+      outline: "none",
+      height: "2rem",
+      width: "100%",
+      fontSize: "1rem",
+      margin: "0 0 20px 0",
+      boxShadow: "none",
+      boxSizing: "content-box",
+      transition: "all 0.3s",
+      color: "#212121",
+
+    },
+  },
+  description: {
+    position: "relative",
+    input: {
+      backgroundColor: "transparent",
+      border: "none",
+      borderBottom: "1px solid rgb(196 196 196)",
+      borderRadius: "0",
+      outline: "none",
+      height: "2rem",
+      width: "100%",
+      fontSize: "1rem",
+      margin: "0 0 20px 0",
+      boxShadow: "none",
+      boxSizing: "content-box",
+      transition: "all 0.3s",
+      color: "#212121",
+    },
+  },
+}
+
 export const OAuth = () => {
+  const classes = useStyles();
 
   const session = useSession(); //tokens have user when session exist
   const supabase = useSupabaseClient(); //connect to supabase
   const { isLoading } = useSessionContext();
-  const [state, setState] = useState({
+  const [eventData, setEventData] = useState({
     start: null,
     end: null,
     eventName: "",
     eventDescription: "",
     anchorEl: null,
   });
-  const { start, end, eventName, eventDescription, anchorEl } = state;
+  const { start, end, eventName, eventDescription, anchorEl } = eventData;
 
   if(isLoading){
     <Box sx={{ display: 'flex' }}>
@@ -56,11 +142,11 @@ export const OAuth = () => {
   // popup start
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setState({ ...state, anchorEl: event.currentTarget });
+    setEventData({ ...eventData, anchorEl: event.currentTarget });
   };
 
   const handleClose = () => {
-    setState({ ...state, anchorEl: null });
+    setEventData({ ...eventData, anchorEl: null });
   };
 
   const open = Boolean(anchorEl);
@@ -98,8 +184,8 @@ export const OAuth = () => {
       console.log('Your event is created successfully:', responseData);
   
       // Reset form fields after successful event creation
-      setState({
-        ...state,
+      setEventData({
+        ...eventData,
         eventName: "",
         eventDescription: "",
         start: null,
@@ -115,14 +201,14 @@ export const OAuth = () => {
 
   return (
     <div className='wrapper'>
-       <header>
-        {session && <h2>Hey {session.user.user_metadata.full_name}</h2>}
-          <div className='user-icon'><FontAwesomeIcon icon={faUser} /></div>
+       <header className={classes.header}>
+        {session && <h2 className={classes.headerH2}>Hey {session.user.user_metadata.full_name}</h2>}
+          <div className={classes.userIcon}><FontAwesomeIcon icon={faUser} /></div>
         </header>
-       <div className="container">
+       <div className={classes.container}>
         { session ? (
         <>
-            <div className='inner-container'>
+            <div className={classes.innerContainer}>
               <Button variant="outlined" size="medium" onClick={handleClick}>
                 <span className="plus-icon"><FontAwesomeIcon icon={faPlus} /></span> Create
               </Button>
@@ -130,35 +216,35 @@ export const OAuth = () => {
               <Popover id={open && 'simple-popover'} open={open} anchorEl={anchorEl} onClose={handleClose} anchorReference="anchorPosition" anchorPosition={{ top: 150, left: 250 }} anchorOrigin={{ vertical: 'center', horizontal: 'right', }} transformOrigin={{ vertical: 'top', horizontal: 'left',}}>
                   <Typography variant="h5" gutterBottom><span class="event-heading">Add an Event</span></Typography>
 
-                  <div className="title">
-                    <input type="text" id="eventTitle" value={eventName} onChange={(e) => { setState({ ...state, eventName: e.target.value }) }} autoComplete='off' />
-                    <lable>Add Title</lable>
+                  <div className="title" style={styles.title}>
+                    <input type="text" id="eventTitle" style={styles.title.input} value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} autoComplete='off' />
+                    <lable style={styles.title.lable}>Add Title</lable>
                   </div>
                   <div className="date-time">
                     <div className="start-date-time">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={['DateTimePicker']}>
-                          <DateTimePicker label="START DATE & TIME"  value={start}  onChange={(newValue) => setState({ ...state, start: newValue })} />
+                          <DateTimePicker label="START DATE & TIME"  value={start}  onChange={(newValue) => setEventData({ ...eventData, start: newValue })} />
                         </DemoContainer>
                       </LocalizationProvider>
                     </div>
                     <div className="end-date-time">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={['DateTimePicker']}>
-                          <DateTimePicker label="END DATE & TIME" value={end}  onChange={(newValue) => setState({ ...state, end: newValue })} />
+                          <DateTimePicker label="END DATE & TIME" value={end}  onChange={(newValue) => setEventData({ ...eventData, end: newValue })} />
                         </DemoContainer> 
                     </LocalizationProvider>
                     </div>
                   </div>
-                  <div className='description'>
-                    <input type="text" value={eventDescription} onChange={(e) => { setState({ ...state, eventDescription: e.target.value }) }} autoComplete='off' />
-                    <lable>Add Description</lable>
+                  <div className='description' style={styles.description}>
+                    <input type="text" style={styles.description.input} value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} autoComplete='off' />
+                    <lable style={styles.lable}>Add Description</lable>
                   </div>
                   <div className='buttons'>
                     <Button variant="contained" size="medium" onClick={() => createCalendarEvent()}> Create Calendar Event </Button>
                   </div>
               </Popover>
-              <Button variant="contained" size="medium" onClick={() => signOut()}> Sign Out </Button>
+              <Button className={classes.signOutButton} variant="contained" size="medium" onClick={() => signOut()}> Sign Out </Button>
               <EventDisplay />
             </div>
         </>

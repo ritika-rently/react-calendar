@@ -3,11 +3,11 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListUl, faTrash} from '@fortawesome/fontawesome-free-solid';
-import { useGapiClient } from './useGapiClient';
+import  useGapiClient  from './useGapiClient';
 import { useCalendarEvents } from './useCalendarEvents';
 
 function EventDisplay() {
-  useGapiClient();
+  <useGapiClient/>
   const { events, fetchEvents, deleteEvent } = useCalendarEvents();
   
   return (
