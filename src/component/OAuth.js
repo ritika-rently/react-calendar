@@ -15,6 +15,7 @@ import { faPlus, faUser} from '@fortawesome/fontawesome-free-solid';
 import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import EventDisplay from './EventDisplay';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,46 +61,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const styles = {
-  title: {
-    position: "relative",
-    input: {
-      backgroundColor: "transparent",
-      border: "none",
-      borderBottom: "1px solid rgb(196 196 196)",
-      borderRadius: "0",
-      outline: "none",
-      height: "2rem",
-      width: "100%",
-      fontSize: "1rem",
-      margin: "0 0 20px 0",
-      boxShadow: "none",
-      boxSizing: "content-box",
-      transition: "all 0.3s",
-      color: "#212121",
-
-    },
-  },
-  description: {
-    position: "relative",
-    input: {
-      backgroundColor: "transparent",
-      border: "none",
-      borderBottom: "1px solid rgb(196 196 196)",
-      borderRadius: "0",
-      outline: "none",
-      height: "2rem",
-      width: "100%",
-      fontSize: "1rem",
-      margin: "0 0 20px 0",
-      boxShadow: "none",
-      boxSizing: "content-box",
-      transition: "all 0.3s",
-      color: "#212121",
-    },
-  },
-}
-
 export const OAuth = () => {
   const classes = useStyles();
 
@@ -142,7 +103,7 @@ export const OAuth = () => {
 
   // popup start
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event) => {
     setEventData({ ...eventData, anchorEl: event.currentTarget });
   };
 
@@ -159,30 +120,24 @@ export const OAuth = () => {
       'summary': eventName,
       'description': eventDescription,
       'start': {
-        'dateTime': start.toISOString(),
+        'dateTime': start?.toISOString(),
         'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
       },
       'end': {
-        'dateTime': end.toISOString(),
+        'dateTime': end?.toISOString(),
         'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
       },
     };
-  
+
     try {
-      const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
-        method: "POST",
+      const response = await axios.post("https://www.googleapis.com/calendar/v3/calendars/primary/events", event, {
         headers: {
-          'Authorization': 'Bearer ' + session.provider_token,
+          'Authorization': 'Bearer ' + session?.provider_token,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(event),
       });
-      if (!response.ok) {
-        throw new Error('Failed to create event: ' + response.status);
-      }
   
-      const responseData = await response.json();
-      console.log('Your event is created successfully:', responseData);
+      console.log('Your event is created successfully:', response.data);
   
       // Reset form fields after successful event creation
       setEventData({
@@ -199,11 +154,42 @@ export const OAuth = () => {
     }
   };
   
+  //   try {
+  //     const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
+  //       method: "POST",
+  //       headers: {
+  //         'Authorization': 'Bearer ' + session?.provider_token,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(event),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Failed to create event: ' + response.status);
+  //     }
+  
+  //     const responseData = await response.json();
+  //     console.log('Your event is created successfully:', responseData);
+  
+  //     // Reset form fields after successful event creation
+  //     setEventData({
+  //       ...eventData,
+  //       eventName: "",
+  //       eventDescription: "",
+  //       start: null,
+  //       end: null,
+  //       anchorEl: null, // Closing the popover
+  //     });
+  
+  //   } catch (error) {
+  //     console.error('Error creating event:', error.message);
+  //   }
+  // };
+  
 
   return (
     <div className='wrapper'>
        <header className={classes.header}>
-        {session && <h2 className={classes.headerH2}>Hey {session.user.user_metadata.full_name}</h2>}
+        {session && <h2 className={classes.headerH2}>Hey {session.user?.user_metadata?.full_name}</h2>}
           <div className={classes.userIcon}><FontAwesomeIcon icon={faUser} /></div>
         </header>
        <div className={classes.container}>
@@ -217,12 +203,10 @@ export const OAuth = () => {
               <Popover id={open && 'simple-popover'} open={open} anchorEl={anchorEl} onClose={handleClose} anchorReference="anchorPosition" anchorPosition={{ top: 150, left: 250 }} anchorOrigin={{ vertical: 'center', horizontal: 'right', }} transformOrigin={{ vertical: 'top', horizontal: 'left',}}>
                   <Typography variant="h5" gutterBottom><span class="event-heading">Add an Event</span></Typography>
 
-                  <div className="title" style={styles.title}>
-                  <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '55ch' },}} noValidate autoComplete="off">
-                    <TextField id="standard-basic" label="Add Title" variant="standard" value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} />
-                  </Box>
-                    {/* <input type="text" id="eventTitle" style={styles.title.input} value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} autoComplete='off' /> */}
-                    {/* <lable style={styles.title.lable}>Add Title</lable> */}
+                  <div className="title">
+                    <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '55ch' },}} noValidate autoComplete="off">
+                      <TextField id="standard-basic" label="Add Title" variant="standard" value={eventName} onChange={(e) => { setEventData({ ...eventData, eventName: e.target.value }) }} />
+                    </Box>
                   </div>
                   <div className="date-time">
                     <div className="start-date-time">
@@ -240,12 +224,10 @@ export const OAuth = () => {
                     </LocalizationProvider>
                     </div>
                   </div>
-                  <div className='description' style={styles.description}>
+                  <div className='description'>
                     <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '55ch' },}} noValidate autoComplete="off">
                       <TextField id="standard-basic" label="Add Description" variant="standard" value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} />
                     </Box>
-                    {/* <input type="text" style={styles.description.input} value={eventDescription} onChange={(e) => { setEventData({ ...eventData, eventDescription: e.target.value }) }} autoComplete='off' />
-                    <lable style={styles.lable}>Add Description</lable> */}
                   </div>
                   <div className='buttons'>
                     <Button variant="contained" size="medium" onClick={() => createCalendarEvent()}> Create Calendar Event </Button>
@@ -257,7 +239,7 @@ export const OAuth = () => {
         </>
          ) : (
         <>
-          <button className="sign-in-button" onClick={() => googleSignIn()}>Sign In With Google</button>
+          <Button variant="contained" size="medium" onClick={() => googleSignIn()}> Sign In With Google </Button>
         </>
         )}
       </div>
