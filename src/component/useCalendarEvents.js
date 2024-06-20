@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 export const useCalendarEvents = () => {
 
-    const CLIENT_ID = "9232136166-u5j9o26murr9q8v5kmve5isn8imo5ull.apps.googleusercontent.com"
-    const SCOPES = "https://www.googleapis.com/auth/calendar.events"
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+    const SCOPES = process.env.REACT_APP_SCOPES;
 
     const [events, setEvents] = useState([]);
    

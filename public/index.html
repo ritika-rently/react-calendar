@@ -36,8 +36,8 @@
 
       function initClient() {
         gapi.client.init({
-          apiKey: "AIzaSyC8cePcxxA7ptrOYKD20vA7IJe5S4D6gfY",
-          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+          apiKey: "%REACT_APP_API_KEY%",
+          discoveryDocs: ["%REACT_APP_DISCOVERY_DOCS%"],
         }).then(() => {
           console.log('GAPI client initialized');
         }).catch((error) => {

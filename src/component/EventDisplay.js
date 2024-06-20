@@ -5,6 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListUl, faTrash} from '@fortawesome/fontawesome-free-solid';
 import  useGapiClient  from './useGapiClient';
 import { useCalendarEvents } from './useCalendarEvents';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 function EventDisplay() {
   <useGapiClient/>
@@ -20,32 +28,60 @@ function EventDisplay() {
         {events.length === 0 ? (
             <p className="no-event">No events found.</p>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Event Summary</th>
-                <th>Event Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="events table">
+              <TableHead>
+              <TableRow>
+                <TableCell>Event Summary</TableCell>
+                <TableCell>Event Date</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {events.map((event) => {
                 let date = event.start.dateTime || event.start.date;
                 let datee = new Date(date);
                 return (
-                  <tr key={event.id}>
-                    <td>{event.summary}</td>
-                    <td>{datee.toLocaleString('en-US')}</td>
-                    <td>
-                      <button className="delete-button" onClick={() => deleteEvent(event.id)}>
+                  <TableRow key={event.id}>
+                    <TableCell>{event.summary}</TableCell>
+                    <TableCell>{datee.toLocaleString('en-US')}</TableCell>
+                    <TableCell>
+                      <Button className="delete-button" variant="outlined" color="secondary" onClick={() => deleteEvent(event.id)}>
                         <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
-            </tbody>
-          </table>
+            </TableBody>
+            </Table>
+          </TableContainer>
+          // <table>
+          //   <thead>
+          //     <tr>
+          //       <th>Event Summary</th>
+          //       <th>Event Date</th>
+          //       <th>Actions</th>
+          //     </tr>
+          //   </thead>
+          //   <tbody>
+          //     {events.map((event) => {
+          //       let date = event.start.dateTime || event.start.date;
+          //       let datee = new Date(date);
+          //       return (
+          //         <tr key={event.id}>
+          //           <td>{event.summary}</td>
+          //           <td>{datee.toLocaleString('en-US')}</td>
+          //           <td>
+          //             <button className="delete-button" onClick={() => deleteEvent(event.id)}>
+          //               <FontAwesomeIcon icon={faTrash} />
+          //             </button>
+          //           </td>
+          //         </tr>
+          //       );
+          //     })}
+          //   </tbody>
+          // </table>
         )}
       </div>
     </>
