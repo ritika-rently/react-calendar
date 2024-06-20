@@ -4,8 +4,6 @@ class GapiClient extends Component {
   constructor(props) {
     super(props);
 
-    // this.API_KEY = "AIzaSyC8cePcxxA7ptrOYKD20vA7IJe5S4D6gfY";
-    // this.DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     this.API_KEY = process.env.REACT_APP_API_KEY;
     this.DISCOVERY_DOCS = [process.env.REACT_APP_DISCOVERY_DOCS];
     /* global gapi */

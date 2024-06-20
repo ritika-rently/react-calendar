@@ -56,32 +56,6 @@ function EventDisplay() {
             </TableBody>
             </Table>
           </TableContainer>
-          // <table>
-          //   <thead>
-          //     <tr>
-          //       <th>Event Summary</th>
-          //       <th>Event Date</th>
-          //       <th>Actions</th>
-          //     </tr>
-          //   </thead>
-          //   <tbody>
-          //     {events.map((event) => {
-          //       let date = event.start.dateTime || event.start.date;
-          //       let datee = new Date(date);
-          //       return (
-          //         <tr key={event.id}>
-          //           <td>{event.summary}</td>
-          //           <td>{datee.toLocaleString('en-US')}</td>
-          //           <td>
-          //             <button className="delete-button" onClick={() => deleteEvent(event.id)}>
-          //               <FontAwesomeIcon icon={faTrash} />
-          //             </button>
-          //           </td>
-          //         </tr>
-          //       );
-          //     })}
-          //   </tbody>
-          // </table>
         )}
       </div>
     </>
