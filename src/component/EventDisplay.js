@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListUl, faTrash} from '@fortawesome/fontawesome-free-solid';
 import  useGapiClient  from './useGapiClient';
 import { useCalendarEvents } from './useCalendarEvents';
-import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,18 +12,29 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+ content: {
+  width: '800px',
+  textAlign: 'center',
+  marginLeft: '310px',
+ },
+}));
 
 function EventDisplay() {
-  <useGapiClient/>
+  const classes = useStyles();
+  // <useGapiClient/>
   const { events, fetchEvents, deleteEvent } = useCalendarEvents();
   
   return (
 
     <>
+      <useGapiClient/>
       <Button variant="outlined" size="medium" onClick={fetchEvents}>
         <span className="plus-icon"><FontAwesomeIcon icon={faListUl} /></span> Display Event List
       </Button>
-      <div id="content">
+      <div className={classes.content}>
         {events.length === 0 ? (
             <p className="no-event">No events found.</p>
         ) : (

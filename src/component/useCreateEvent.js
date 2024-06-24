@@ -21,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
       padding: '20px 10px',
       borderRadius: '10px',
     },
-    container: {
-      display: 'flex',
-      gap: '20px',
-      minHeight: '100%',
-    },
     title: {
       position: 'relative',
     },
@@ -35,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export const CreateEvent = ({ session }) => {
-    console.log(session);
     const classes = useStyles();
     const [eventData, setEventData] = useState({
         start: null,
@@ -129,10 +123,10 @@ export const CreateEvent = ({ session }) => {
   //     console.error('Error creating event:', error.message);
   //   }
   // };
-  
+
   return (
-    <div className={classes.container}>
-      <div className={classes.innerContainer}>
+    <>
+        {/* <div className={classes.innerContainer}> */}
             <Button variant="outlined" size="medium" onClick={handleClick}>
                 <span className="plus-icon"><FontAwesomeIcon icon={faPlus} /></span> Create
             </Button>
@@ -170,7 +164,7 @@ export const CreateEvent = ({ session }) => {
                     <Button variant="contained" size="medium" onClick={() => handleCalendarEvent()}> Create Calendar Event </Button>
                   </div>
             </Popover>
-            </div>
-    </div>
+        {/* </div> */}
+    </>
   )
 }

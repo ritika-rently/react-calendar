@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat, Sans-Serif',
     fontStyle: 'italic',
   },
+  container: {
+    marginTop: '70px',
+    textAlign: 'center',
+  },
   userIcon: {
     marginLeft: 'auto',
     verticalAlign: 'middle',
@@ -67,6 +71,8 @@ export const OAuth = () => {
     }
   }
 
+  
+
   return (
     <div className='wrapper'>
        <header className={classes.header}>
@@ -75,11 +81,11 @@ export const OAuth = () => {
         </header>
       
         { session ? (
-          <>
+          <div className={classes.container}>
             <CreateEvent session={session} />
             <Button className={classes.signOutButton} variant="contained" size="medium" onClick={() => signOut()}> Sign Out </Button>
             <EventDisplay />
-          </>
+          </div>
         ) : (
           <>
             <Button variant="contained" size="medium" onClick={() => googleSignIn()}> Sign In With Google </Button>
