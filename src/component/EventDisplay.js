@@ -24,13 +24,11 @@ const useStyles = makeStyles((theme) => ({
 
 function EventDisplay() {
   const classes = useStyles();
-  // <useGapiClient/>
   const { events, fetchEvents, deleteEvent } = useCalendarEvents();
   
   return (
 
     <>
-      <useGapiClient/>
       <Button variant="outlined" size="medium" onClick={fetchEvents}>
         <span className="plus-icon"><FontAwesomeIcon icon={faListUl} /></span> Display Event List
       </Button>

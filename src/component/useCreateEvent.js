@@ -93,37 +93,6 @@ export const CreateEvent = ({ session }) => {
     }
   };
 
-  //   try {
-  //     const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
-  //       method: "POST",
-  //       headers: {
-  //         'Authorization': 'Bearer ' + session?.provider_token,
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(event),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error('Failed to create event: ' + response.status);
-  //     }
-  
-  //     const responseData = await response.json();
-  //     console.log('Your event is created successfully:', responseData);
-  
-  //     // Reset form fields after successful event creation
-  //     setEventData({
-  //       ...eventData,
-  //       eventName: "",
-  //       eventDescription: "",
-  //       start: null,
-  //       end: null,
-  //       anchorEl: null, // Closing the popover
-  //     });
-  
-  //   } catch (error) {
-  //     console.error('Error creating event:', error.message);
-  //   }
-  // };
-
   return (
     <>
         {/* <div className={classes.innerContainer}> */}
