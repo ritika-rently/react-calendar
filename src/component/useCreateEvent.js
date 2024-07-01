@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus} from '@fortawesome/fontawesome-free-solid';
 import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
+import { gapi } from 'gapi-script';
 
 const useStyles = makeStyles((theme) => ({
     innerContainer: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export const CreateEvent = ({ session }) => {
+export const CreateEvent = ({ user }) => {
     const classes = useStyles();
     const [eventData, setEventData] = useState({
         start: null,
@@ -55,6 +56,10 @@ export const CreateEvent = ({ session }) => {
   // popup close
 
   const handleCalendarEvent = async () => {
+    const authInstance = gapi.auth2.getAuthInstance()
+    const currentUser = authInstance.currentUser.get();
+    const token = currentUser.getAuthResponse().access_token;
+
     const event = {
       'summary': eventData.eventName,
       'description': eventData.eventDescription,
@@ -71,7 +76,7 @@ export const CreateEvent = ({ session }) => {
     try {
       const response = await axios.post("https://www.googleapis.com/calendar/v3/calendars/primary/events", event, {
         headers: {
-          'Authorization': 'Bearer ' + session?.provider_token,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });

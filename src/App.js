@@ -1,10 +1,10 @@
 import './App.css';
-import { OAuth } from './component/OAuth';
+import { Application } from './component/Application';
 
 function App() {
   return (
     <div className="App">
-      <OAuth />
+      <Application />
     </div>
   );
 }

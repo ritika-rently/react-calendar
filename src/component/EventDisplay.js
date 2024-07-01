@@ -3,7 +3,6 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListUl, faTrash} from '@fortawesome/fontawesome-free-solid';
-import  useGapiClient  from './useGapiClient';
 import { useCalendarEvents } from './useCalendarEvents';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
