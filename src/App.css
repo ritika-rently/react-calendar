@@ -75,3 +75,7 @@ table tbody tr:nth-child(1) {
   color: #fff;
   margin-top: 50px;
 }
+.loading{
+  justify-content: center;
+  padding-top: 200px;
+}

@@ -10,6 +10,9 @@ import EventDisplay from './EventDisplay';
 import { CreateEvent } from './useCreateEvent';
 
 const useStyles = makeStyles((theme) => ({
+  wrapper:{
+    textAlign: 'center',
+  },
   header: {
     display: 'flex',
     padding: '10px 50px',
@@ -35,7 +38,10 @@ const useStyles = makeStyles((theme) => ({
   signOutButton: {
     textAlign: 'center',
     margin: '50px 150px',
-  }
+  },
+  signInButton: {
+    marginTop: '50px !important',
+  },
 }));
 
 export const Application = () => {
@@ -73,7 +79,7 @@ export const Application = () => {
   
   return (
     <GapiClient render={({ isSignedIn, user, googleSignIn, googleSignOut }) => (
-      <div className='wrapper'>
+      <div className={classes.wrapper}>
         <header className={classes.header}>
           {isSignedIn && user && <h2 className={classes.headerH2}>Hey {user.getName()}</h2>}
             <div className={classes.userIcon}><FontAwesomeIcon icon={faUser} /></div>
@@ -87,7 +93,7 @@ export const Application = () => {
             </div>
           ) : (
             <>
-              <Button variant="contained" size="medium" onClick={googleSignIn}> Sign In With Google </Button>
+              <Button className={classes.signInButton} variant="contained" size="medium" onClick={googleSignIn}> Sign In With Google </Button>
             </>
           )}
       </div>

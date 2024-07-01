@@ -27,6 +27,7 @@ class GapiClient extends Component {
         clientId: this.CLIENT_ID,
         discoveryDocs: this.DISCOVERY_DOCS,
         scope: this.SCOPES,
+        plugin_name: 'calendar',
       }).then(() => {
         const authInstance = gapi.auth2.getAuthInstance();
         this.setIsSignedIn(authInstance.isSignedIn.get());
@@ -50,7 +51,7 @@ class GapiClient extends Component {
   };
 
   signIn = () => {
-    gapi.auth2.getAuthInstance().signIn().then(user => {
+    gapi.auth2.getAuthInstance().signIn({prompt: 'consent'}).then(user => {
       this.setUser(user.getBasicProfile());
       this.setIsSignedIn(true);
     }).catch(error => {
@@ -71,7 +72,7 @@ class GapiClient extends Component {
     const { isSignedIn, user, loading } = this.state;
   
     if (loading) {
-      return <Box sx={{ display: 'flex' }}><CircularProgress /></Box>
+      return <Box sx={{ display: 'flex' }} className='loading'><CircularProgress /></Box>
     }
     return (
       <div>

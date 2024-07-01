@@ -10,28 +10,12 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus} from '@fortawesome/fontawesome-free-solid';
-import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import { gapi } from 'gapi-script';
 
-const useStyles = makeStyles((theme) => ({
-    innerContainer: {
-      width: '800px',
-      margin: '90px auto',
-      textAlign: 'center',
-      padding: '20px 10px',
-      borderRadius: '10px',
-    },
-    title: {
-      position: 'relative',
-    },
-    description: {
-      position: 'relative',
-    },
-  }));
+
 
 export const CreateEvent = ({ user }) => {
-    const classes = useStyles();
     const [eventData, setEventData] = useState({
         start: null,
         end: null,
